@@ -1,8 +1,6 @@
 import 'package:amp/screens/login_screen.dart';
 import 'package:amp/screens/registration_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const id = 'welcome_screen';
@@ -60,23 +58,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             Hero(
               tag: 'login_button',
-              child: Expanded(
-                flex: 1,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16.0),
-                  child: Material(
-                    elevation: 5.0,
-                    color: Colors.purple.shade400,
-                    borderRadius: BorderRadius.circular(30.0),
-                    child: MaterialButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, LoginScreen.id);
-                      },
-                      minWidth: 200.0,
-                      height: 42.0,
-                      child: Text(
-                        'Log In',
-                      ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 16.0),
+                child: Material(
+                  elevation: 5.0,
+                  color: Colors.purple.shade400,
+                  borderRadius: BorderRadius.circular(30.0),
+                  child: MaterialButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, LoginScreen.id);
+                    },
+                    minWidth: 200.0,
+                    height: 42.0,
+                    child: Text(
+                      'Log In',
                     ),
                   ),
                 ),
@@ -84,23 +79,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             Hero(
               tag: 'register_button',
-              child: Expanded(
-                flex: 1,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16.0),
-                  child: Material(
-                    color: Colors.purple.shade700,
-                    borderRadius: BorderRadius.circular(30.0),
-                    elevation: 5.0,
-                    child: MaterialButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, RegistrationScreen.id);
-                      },
-                      minWidth: 200.0,
-                      height: 42.0,
-                      child: Text(
-                        'Register',
-                      ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 16.0),
+                child: Material(
+                  color: Colors.purple.shade700,
+                  borderRadius: BorderRadius.circular(30.0),
+                  elevation: 5.0,
+                  child: MaterialButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, RegistrationScreen.id);
+                    },
+                    minWidth: 200.0,
+                    height: 42.0,
+                    child: Text(
+                      'Register',
                     ),
                   ),
                 ),

@@ -5,9 +5,9 @@ import 'package:amp/screens/registration_screen.dart';
 import 'package:amp/screens/chat_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() => runApp(FlashChat());
+void main() => runApp(Amp());
 
-class FlashChat extends StatelessWidget {
+class Amp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
