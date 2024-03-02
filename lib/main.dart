@@ -17,7 +17,10 @@ class Amp extends StatelessWidget {
     return MaterialApp(
       title: 'Amp',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: GoogleFonts.shantellSans().fontFamily),
+      theme: ThemeData(
+        fontFamily: GoogleFonts.shantellSans().fontFamily,
+        scaffoldBackgroundColor: Colors.grey.shade900,
+      ),
       initialRoute: WelcomeScreen.id,
       routes: {
         WelcomeScreen.id: (context) => WelcomeScreen(),

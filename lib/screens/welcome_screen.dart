@@ -29,7 +29,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         Hero(
-                          tag: 'logo',
+                          tag: 'amplogo',
                           child: Container(
                             child: Image.asset('images/logo.png'),
                             height: 80.0,

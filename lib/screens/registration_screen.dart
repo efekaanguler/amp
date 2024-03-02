@@ -27,7 +27,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               height: 48.0,
             ),
             Hero(
-              tag: 'logo',
+              tag: 'amplogo',
               child: Container(
                 height: 200.0,
                 child: Image.asset('images/logo.png'),
