@@ -8,11 +8,18 @@ import 'registration_screen.dart';
 
 class ChatScreen extends StatefulWidget {
   static const id = 'chat_screen';
+
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  @override
+  void initState() {
+    email = FirebaseAuth.instance.currentUser!.email!;
+    super.initState();
+  }
+
   final messageTextConroller = TextEditingController();
   final _firestore = FirebaseFirestore.instance;
   String? messageText;

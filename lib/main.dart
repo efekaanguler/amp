@@ -6,6 +6,7 @@ import 'package:amp/screens/chat_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:amp/screens/firebase_data.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() {
   runApp(App());
@@ -21,7 +22,9 @@ class Amp extends StatelessWidget {
         fontFamily: GoogleFonts.shantellSans().fontFamily,
         scaffoldBackgroundColor: Colors.grey.shade900,
       ),
-      initialRoute: WelcomeScreen.id,
+      initialRoute: (FirebaseAuth.instance.currentUser?.email != null)
+          ? ChatScreen.id
+          : WelcomeScreen.id,
       routes: {
         WelcomeScreen.id: (context) => WelcomeScreen(),
         LoginScreen.id: (context) => LoginScreen(),
