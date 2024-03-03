@@ -2,6 +2,8 @@ import 'package:amp/screens/login_screen.dart';
 import 'package:amp/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
 
+late String email;
+
 class WelcomeScreen extends StatefulWidget {
   static const id = 'welcome_screen';
   @override

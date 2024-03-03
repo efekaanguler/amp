@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'chat_screen.dart';
+import 'welcome_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   static const id = 'login_screen';
@@ -10,7 +11,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _auth = FirebaseAuth.instance;
-  late String email;
+
   late String password;
   @override
   Widget build(BuildContext context) {
@@ -44,6 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 email = value;
               },
               decoration: InputDecoration(
+                hintStyle: TextStyle(color: Colors.grey.shade600),
                 hintText: 'Enter your email',
                 contentPadding:
                     EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
@@ -73,7 +75,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 password = value;
               },
               decoration: InputDecoration(
-                hintText: 'Enter your password.',
+                hintStyle: TextStyle(color: Colors.grey.shade600),
+                hintText: 'Enter your password',
                 contentPadding:
                     EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 border: OutlineInputBorder(

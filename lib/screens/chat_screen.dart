@@ -1,8 +1,8 @@
 import 'package:amp/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'registration_screen.dart';
-import 'login_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'welcome_screen.dart';
 
 class ChatScreen extends StatefulWidget {
   static const id = 'chat_screen';
@@ -11,10 +11,21 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  final _firestore = FirebaseFirestore.instance;
+  String? messageText;
+
+  void messagesStream() async {
+    await for (var snapshot in _firestore.collection('messages').snapshots()) {
+      for (var message in snapshot.docs) {
+        print(message.data);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         centerTitle: true,
         automaticallyImplyLeading: false,
@@ -44,39 +55,71 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            StreamBuilder<QuerySnapshot>(
+              stream: _firestore.collection('messages').snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final messages = (snapshot.data as QuerySnapshot).docs;
+                  List<Text> messageWidgets = [];
+                  for (var message in messages) {
+                    final messageText = message.get('text');
+                    final messageSender = message.get('sender');
+                    final messageWidget = Text(
+                      '$messageText from $messageSender',
+                      style: TextStyle(color: Colors.white),
+                    );
+                    messageWidgets.add(messageWidget);
+                  }
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: messageWidgets,
+                  );
+                } else {
+                  return SizedBox();
+                }
+              },
+            ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Expanded(
-                  child: TextField(
-                    obscureText: false,
-                    style: TextStyle(color: Colors.white),
-                    onChanged: (value) {
-                      //Do something with the user input.
-                    },
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Colors.purple.shade400, width: 1.0),
-                        borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Colors.purple.shade400, width: 2.0),
-                        borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                      ),
-                      contentPadding: EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 20.0),
-                      hintText: 'Type your message here...',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: TextField(
+                      obscureText: false,
+                      style: TextStyle(color: Colors.white),
+                      onChanged: (value) {
+                        messageText = value;
+                      },
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Colors.purple.shade400, width: 1.0),
+                          borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Colors.purple.shade400, width: 2.0),
+                          borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                        ),
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 20.0),
+                        hintText: 'Type your message here...',
+                        hintStyle: TextStyle(color: Colors.grey.shade600),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                        ),
                       ),
                     ),
                   ),
                 ),
                 TextButton(
                   onPressed: () {
-                    //Implement send functionality.
+                    _firestore.collection('messages').add({
+                      'text': messageText,
+                      'sender': email,
+                    });
                   },
                   child: Icon(
                     Icons.send,
