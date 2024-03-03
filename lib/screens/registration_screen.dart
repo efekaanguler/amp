@@ -16,7 +16,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.grey.shade900,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
@@ -27,11 +27,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             SizedBox(
               height: 48.0,
             ),
-            Hero(
-              tag: 'amplogo',
-              child: Container(
-                height: 200.0,
-                child: Image.asset('images/logo.png'),
+            Flexible(
+              child: Hero(
+                tag: 'amplogo',
+                child: Container(
+                  height: 200.0,
+                  child: Image.asset('images/logo.png'),
+                ),
               ),
             ),
             SizedBox(
