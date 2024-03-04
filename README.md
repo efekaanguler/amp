@@ -1,16 +1,8 @@
-# amp
+# AMP
 
-A new Flutter project.
+AMP is a mobile application developed to enable people all over the world to communicate in a world wide chat room.
 
-## Getting Started
+# Installing The App
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Download the latest .apk version in "Releases" section. Run it on an Android phone or emulator. App requires internet connection.
+> Android may throw security warning since app is not downloaded through Play Store, just ignore them.
