@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'welcome_screen.dart';
 import 'login_screen.dart';
 import 'registration_screen.dart';
+import 'package:flutter/services.dart';
 
 class ChatScreen extends StatefulWidget {
   static const id = 'chat_screen';
@@ -64,6 +65,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   child: Padding(
                     padding: EdgeInsets.all(10),
                     child: TextField(
+                      textCapitalization: TextCapitalization.sentences,
                       controller: messageTextConroller,
                       obscureText: false,
                       style: TextStyle(color: Colors.white),
@@ -159,37 +161,42 @@ class MessageBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(10.0),
-      child: Column(
-        crossAxisAlignment:
-            isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-        children: [
-          Text(
-            '$sender',
-            style: TextStyle(
-              color: Colors.grey.shade400,
-              fontSize: 10.0,
-            ),
-          ),
-          Material(
-            borderRadius: BorderRadius.only(
-              topLeft: isMe ? Radius.circular(30) : Radius.circular(0),
-              topRight: isMe ? Radius.circular(0) : Radius.circular(30),
-              bottomLeft: Radius.circular(30),
-              bottomRight: Radius.circular(30),
-            ),
-            elevation: 5.0,
-            color: isMe ? Colors.purple.shade700 : Colors.grey.shade800,
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child: Text(
-                '$text',
-                style: TextStyle(color: Colors.white, fontSize: 15.0),
+    return TextButton(
+      onPressed: () async {
+        await Clipboard.setData(ClipboardData(text: "your text"));
+      },
+      child: Padding(
+        padding: EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment:
+              isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+          children: [
+            Text(
+              isMe ? 'me' : '$sender',
+              style: TextStyle(
+                color: Colors.grey.shade400,
+                fontSize: 10.0,
               ),
             ),
-          ),
-        ],
+            Material(
+              borderRadius: BorderRadius.only(
+                topLeft: isMe ? Radius.circular(30) : Radius.circular(0),
+                topRight: isMe ? Radius.circular(0) : Radius.circular(30),
+                bottomLeft: Radius.circular(30),
+                bottomRight: Radius.circular(30),
+              ),
+              elevation: 5.0,
+              color: isMe ? Colors.purple.shade700 : Colors.grey.shade800,
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                child: Text(
+                  '$text',
+                  style: TextStyle(color: Colors.white, fontSize: 15.0),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
